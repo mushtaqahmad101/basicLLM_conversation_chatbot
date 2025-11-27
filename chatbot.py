@@ -4,9 +4,16 @@ import json
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 app = Flask(__name__)
 CORS(app)
+
 model_name = "facebook/blenderbot-400M-distill"
 model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
+
+# model_name = "mistralai/Mistral-7B-Instruct"
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
+# model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
+
+
 conversation_history = []
 @app.route('/', methods=['GET'])
 def home():
@@ -32,3 +39,4 @@ def handle_prompt():
     return response
 if __name__ == '__main__':
     app.run(debug = True)
+
